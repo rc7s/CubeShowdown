@@ -32,6 +32,8 @@ public class Stealth : MonoBehaviour {
 	//	public Rigidbody rb;
 	//	public Vector3 boost;
 	private Vector3 moveVector;
+	private float rate;
+	private float nrate;
 
 	// Use this for initialization
 	void Awake () {
@@ -53,6 +55,8 @@ public class Stealth : MonoBehaviour {
 	void Update () {
 		GetInput();
 		ProcessInput();
+		fadeIn ();
+		fadeOut ();
 	}
 
 	private void GetInput(){
@@ -80,13 +84,26 @@ public class Stealth : MonoBehaviour {
 	private void ProcessInput(){
 
 		if (b2) {
-			stealth.intensity = 0f;
+			//stealth.intensity = 0f;
+			rate = 0f;
+			nrate = -0.2f;
 			audio.Play ();
 		}
 		if (b2up) {
-			stealth.intensity = 3.9f;
+			rate = 0.5f;
+			nrate = 0f;
 		}
+	}
 
+	private void fadeIn(){
+		if (stealth.intensity < 3.9f) {
+			stealth.intensity += rate;
+		}
+	}
 
+	private void fadeOut(){
+		if (stealth.intensity != 0) {
+			stealth.intensity += nrate;
+		}
 	}
 }

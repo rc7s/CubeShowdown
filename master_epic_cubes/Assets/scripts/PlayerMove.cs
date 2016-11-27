@@ -82,7 +82,7 @@ public class PlayerMove : MonoBehaviour {
 		
 		if (lStickX != 0 || lStickY != 0) {
 			cc.Move (moveVector * moveSpeed * Time.deltaTime);
-			if (!audio.isPlaying) {
+			if (!audio.isPlaying && (Mathf.Abs(lStickX) > 0.5f||Mathf.Abs(lStickY) > 0.5f)) {
 				//audio.PlayOneShot (step, 1f);
 				playStep();
 			}

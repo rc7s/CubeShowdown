@@ -41,7 +41,11 @@ public class PlayerMove : MonoBehaviour {
         // Get the character controller
         cc = GetComponent<CharacterController>();
 
-		audio = GetComponent<AudioSource> ();
+		if(GetComponent<AudioSource>() != null)
+		{
+			audio = GetComponent<AudioSource> ();
+		}
+		//audio = GetComponent<AudioSource> ();
 
 		//obj = GetComponent<GameObject>();
 
@@ -86,6 +90,7 @@ public class PlayerMove : MonoBehaviour {
 		
 		 	
 			cc.Move (moveVector * moveSpeed * Time.deltaTime);
+
 			if (!audio.isPlaying && (Mathf.Abs(lStickX) > 0.5f||Mathf.Abs(lStickY) > 0.5f)) {
 				//audio.PlayOneShot (step, 1f);
 				playStep();

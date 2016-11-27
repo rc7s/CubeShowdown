@@ -26,6 +26,9 @@ public class Stealth : MonoBehaviour {
 	private float r2;
 	private float l2;
 
+	public AudioSource audio;
+	public AudioClip clip;
+
 	//	public Rigidbody rb;
 	//	public Vector3 boost;
 	private Vector3 moveVector;
@@ -41,6 +44,8 @@ public class Stealth : MonoBehaviour {
 		//		rb = GetComponent<Rigidbody> ();
 
 		stealth = GetComponent<Light> ();
+
+		audio = GetComponent<AudioSource> ();
 
 	}
 
@@ -76,6 +81,7 @@ public class Stealth : MonoBehaviour {
 
 		if (b2) {
 			stealth.intensity = 0f;
+			audio.Play ();
 		}
 		if (b2up) {
 			stealth.intensity = 3.9f;

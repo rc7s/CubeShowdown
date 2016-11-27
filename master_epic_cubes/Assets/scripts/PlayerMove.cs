@@ -27,7 +27,10 @@ public class PlayerMove : MonoBehaviour {
 //	public Rigidbody rb;
 //	public Vector3 boost;
 	private Vector3 moveVector;
+	private Vector3 shake;
 	public float moveSpeed;
+	public AudioClip step;
+	private AudioSource audio;
 
 	// Use this for initialization
 	void Awake () {
@@ -37,6 +40,8 @@ public class PlayerMove : MonoBehaviour {
         // Get the character controller
         cc = GetComponent<CharacterController>();
 
+		audio = GetComponent<AudioSource> ();
+
 //		rb = GetComponent<Rigidbody> ();
 	
 	}
@@ -45,6 +50,7 @@ public class PlayerMove : MonoBehaviour {
 	void FixedUpdate () {
 		GetInput();
 		ProcessInput();
+		iTween.ShakeScale (gameObject, shake, 1);
 	}
 
 	private void GetInput(){
@@ -66,12 +72,25 @@ public class PlayerMove : MonoBehaviour {
 		moveVector.x = lStickX;
 		moveVector.z = lStickY;
 
+		shake.x = 2f;
+		shake.y = 2f;
+		shake.z = 2f;
+
 	}
 
 	private void ProcessInput(){
 		
 		if (lStickX != 0 || lStickY != 0) {
 			cc.Move (moveVector * moveSpeed * Time.deltaTime);
+			if (!audio.isPlaying) {
+				//audio.PlayOneShot (step, 1f);
+				playStep();
+			}
 		}
+
+	}
+
+	void playStep(){
+		iTween.Stab (gameObject, step, 0f);
 	}
 }

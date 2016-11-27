@@ -32,6 +32,7 @@ public class LightAdj : MonoBehaviour {
 	private Vector3 originMove;
 	private Vector3 spriteOrigin;
 	private Vector3 lightDisp;
+	private Vector3 shake;
 
 	// Use this for initialization
 	void Awake () {
@@ -51,6 +52,7 @@ public class LightAdj : MonoBehaviour {
 	void FixedUpdate () {
 		GetInput();
 		ProcessInput();
+		iTween.ShakeScale (gameObject, shake, 1);
 	}
 
 	private void GetInput(){
@@ -76,6 +78,10 @@ public class LightAdj : MonoBehaviour {
 		originMove.x = lStickX;
 		originMove.z = lStickY;
 		originMove.y = 0;
+
+		shake.x = 20f;
+		shake.y = 20f;
+		shake.z = 20f;
 
 	}
 

@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour {
 	public int playerId;
 	private Player player;
 	private CharacterController cc;
+	//private GameObject obj;
 
 	//ctrl vars
 	private float lStickX;
@@ -42,6 +43,8 @@ public class PlayerMove : MonoBehaviour {
 
 		audio = GetComponent<AudioSource> ();
 
+		//obj = GetComponent<GameObject>();
+
 //		rb = GetComponent<Rigidbody> ();
 	
 	}
@@ -71,6 +74,7 @@ public class PlayerMove : MonoBehaviour {
 
 		moveVector.x = lStickX;
 		moveVector.z = lStickY;
+		moveVector.y = -3.0f;
 
 		shake.x = 2f;
 		shake.y = 2f;
@@ -80,13 +84,13 @@ public class PlayerMove : MonoBehaviour {
 
 	private void ProcessInput(){
 		
-		if (lStickX != 0 || lStickY != 0) {
+		 	
 			cc.Move (moveVector * moveSpeed * Time.deltaTime);
 			if (!audio.isPlaying && (Mathf.Abs(lStickX) > 0.5f||Mathf.Abs(lStickY) > 0.5f)) {
 				//audio.PlayOneShot (step, 1f);
 				playStep();
 			}
-		}
+		
 
 	}
 
